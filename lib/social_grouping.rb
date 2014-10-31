@@ -107,7 +107,6 @@ module SocialGrouping
         nhash = nhash.sort{ |a,b|  (b[1]==a[1]) ? b[0].to_s.length<=>a[0].to_s.length : b[1]<=>a[1] }
 
         tmp_result = Hash.new
-
         group_name = ''
         nhash.each do | key, value |
           if tmp_result.length > 2 || value < 2
@@ -120,6 +119,7 @@ module SocialGrouping
           group_name = 'None'
         end
         mining['name'] = group_name
+        mining['values'] = tmp_result
         result['success'] = mining
       rescue StandardError => e
         result['error'] = e.message
