@@ -14,7 +14,8 @@ class YahooClient
   
   def get_noun(profile, nouns)
     texts = Array.new
-    if profile['lang'] == 'ja'
+    initial = profile['profile'][0,1]
+    if profile['lang'] == 'ja' || !initial.ascii_only?
       result = Net::HTTP.get(URI.parse(URI.escape(@ma_api + profile['profile'])))
       doc = REXML::Document.new(result)
       doc.elements.each('ResultSet/uniq_result/word_list/word') do |elem|
