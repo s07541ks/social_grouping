@@ -116,7 +116,10 @@ class TwitterClient
     end
     unless target.blank?
       target.each do | profile |
-        profiles.push( profile.description.to_s.encode('utf-8') + " " )          
+        values = Hash.new
+        values['lang'] = profile.lang
+        values['profile'] = profile.description.to_s.encode('utf-8') + " "
+        profiles.push( values )          
       end
     end
     return profiles

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SocialGrouping do
   it 'version number' do
-    expect(SocialGrouping::VERSION).to eq "1.0.3"
+    expect(SocialGrouping::VERSION).to eq "1.0.5"
   end
 
 #  it 'account' do
@@ -13,7 +13,7 @@ describe SocialGrouping do
 #  end
   
   it 'mining' do
-    data = ["siamcats", "J_frtk"]
+    data = ["siamcats", "jaredacurtis"]
     params = Hash.new
     params[:oauth_token] = ENV['TW_AC_TOKEN']
     params[:oauth_token_secret] = ENV['TW_AC_SECRET']

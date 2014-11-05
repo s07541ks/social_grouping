@@ -90,10 +90,10 @@ module SocialGrouping
         mining['count'] = count
         mining['max'] = max
         data.push( name )
-        profile = @client.get_profiles( data )
+        profiles = @client.get_profiles( data )
         nhash = Hash.new
-        profile.each do | text |
-          nhash = YahooClient.new.get_noun( text, nhash )
+        profiles.each do | profile |
+          nhash = YahooClient.new.get_noun( profile, nhash )
         end
 
         nhash.each do | key, val |

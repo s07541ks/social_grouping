@@ -12,11 +12,19 @@ class YahooClient
     @key_api = 'http://jlp.yahooapis.jp/KeyphraseService/V1/extract?appid=' + ENV['YH_API_ID'] + '&sentence='  
   end
   
-  def get_noun(sentence, nouns)
-    result = Net::HTTP.get(URI.parse(URI.escape(@ma_api + sentence)))
-    doc = REXML::Document.new(result)
-    doc.elements.each('ResultSet/uniq_result/word_list/word') do |elem|
-      noun = elem.elements[2].text.upcase
+  def get_noun(profile, nouns)
+    texts = Array.new
+    if profile['lang'] == 'ja'
+      result = Net::HTTP.get(URI.parse(URI.escape(@ma_api + profile['profile'])))
+      doc = REXML::Document.new(result)
+      doc.elements.each('ResultSet/uniq_result/word_list/word') do |elem|
+        texts.push( elem.elements[2].text.upcase )
+      end
+    else
+      text = profile['profile'].gsub(/(\,|\/)/, '')
+      texts = text.split(' ')
+    end
+    texts.each do |noun|
       if noun.bytesize > 2 && noun.size > 1
         if nouns.key?(noun)
           nouns[noun] += 1
