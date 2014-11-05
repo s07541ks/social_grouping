@@ -50,7 +50,7 @@ module SocialGrouping
     end
 
     def grouping( json, groups )
-      result = init
+      result = init()
       tmp_grouplist = Array.new
       begin
         target_id = json['target']['id'].to_i
