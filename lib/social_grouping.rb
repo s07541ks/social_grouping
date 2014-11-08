@@ -138,6 +138,22 @@ module SocialGrouping
       end
       return result    
     end
+    
+    def corpusing( word )
+      data = @client.get_search( word )
+      count = YahooClient.new.get_count( data )
+      result = Hash.new
+      count.each do | key, value |
+        result[key] = value.to_f / data.length
+      end
+      return result
+    end
+    
+    def probing( users )
+      data = @client.get_timeline( users, 1 )
+      count = YahooClient.new.get_count( data )
+      return count
+    end
 
     private
     def json_to_friends( json )

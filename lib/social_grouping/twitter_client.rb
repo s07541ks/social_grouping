@@ -148,4 +148,35 @@ class TwitterClient
       raise StandardError, 'wait until ' + limit.reset_at.to_s
     end
   end
+  
+  def get_search( word )
+    result = Array.new
+    begin
+      target = @@client.search( word, :result_type => 'recent' ).take(15)
+      target.each do | status |
+        result.push( status.text )
+      end
+    rescue Twitter::Error::TooManyRequests => e
+      limit = e.rate_limit
+      raise StandardError, 'wait until ' + limit.reset_at.to_s
+    end
+    return result
+  end
+
+  def get_timeline( users, count )
+    result = Array.new
+    begin
+      users.each do | user |
+        target = @@client.user_timeline( user.user_id.to_i, :count => count )
+        target.each do | status |
+          result.push( status.text )
+        end
+      end
+    rescue Twitter::Error::TooManyRequests => e
+      limit = e.rate_limit
+      raise StandardError, 'wait until ' + limit.reset_at.to_s
+    end
+    return result
+  end
+  
 end

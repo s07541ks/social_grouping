@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SocialGrouping do
   it 'version number' do
-    expect(SocialGrouping::VERSION).to eq "1.0.7"
+    expect(SocialGrouping::VERSION).to eq "1.1.0"
   end
 
 #  it 'account' do
@@ -13,7 +13,7 @@ describe SocialGrouping do
 #  end
   
 #  it 'grouping' do
-#    json = {"data"=>{"target"=>{"id"=>"113221667", "name"=>"jaredacurtis"}, 
+#    json = {"target"=>{"id"=>"113221667", "name"=>"jaredacurtis"}, 
 #        "friends"=>{
 #          "0"=>{"id"=>"250969887", "name"=>"4lilcutiepies"}, "1"=>{"id"=>"519930935", "name"=>"MannyDontTweat"}, 
 #          "2"=>{"id"=>"41685248", "name"=>"nickpfeiffer"}, "3"=>{"id"=>"28542356", "name"=>"marcelmeth"}, 
@@ -40,21 +40,56 @@ describe SocialGrouping do
 #          "44"=>{"id"=>"17448716", "name"=>"eileencrivera"}, "45"=>{"id"=>"121637687", "name"=>"potomacpen"}, 
 #          "46"=>{"id"=>"1505300755", "name"=>"ChrisWhitenack"}, "47"=>{"id"=>"2726765317", "name"=>"SethWear"}, 
 #          "48"=>{"id"=>"2605444453", "name"=>"CScherrman"}, "49"=>{"id"=>"863647922", "name"=>"hanson_zoe"}, 
-#          "50"=>{"id"=>"881265674", "name"=>"arturnerus1"}}}, 
-#      "key_name"=>"jaredacurtis", "oauth_token"=>"", "oauth_token_secret"=>""}
+#          "50"=>{"id"=>"881265674", "name"=>"arturnerus1"}}
 #    params = Hash.new
 #    params[:oauth_token] = ENV['TW_AC_TOKEN']
 #    params[:oauth_token_secret] = ENV['TW_AC_SECRET']
-#    expect(SocialGrouping::Main.new('twitter', params).grouping( json.to_json, Array.new )).to eq({"error"=>"", "account"=>"webgrp"})        
+#    expect(SocialGrouping::Main.new('twitter', params).grouping( json, Array.new )).to eq({"error"=>"", "account"=>"webgrp"})        
 #  end
-  
-  
-  it 'mining' do
-    data = ["siamcats", "Annaass"]
+ 
+#  it 'mining' do
+#    data = ["siamcats", "Annaass"]
+#    params = Hash.new
+#    params[:oauth_token] = ENV['TW_AC_TOKEN']
+#    params[:oauth_token_secret] = ENV['TW_AC_SECRET']
+#    expect(SocialGrouping::Main.new('twitter', params).mining("0", "4", data, "webgrp")).to eq({"error"=>"", "account"=>"webgrp"})    
+#  end
+
+#  it 'feeling' do
+#    params = Hash.new
+#    params[:oauth_token] = ENV['TW_AC_TOKEN']
+#    params[:oauth_token_secret] = ENV['TW_AC_SECRET']
+#    expect(SocialGrouping::Main.new('twitter', params).feeling( "楽しい" )).to eq({"error"=>"", "account"=>"webgrp"})        
+#  end
+
+  it 'get_count' do
+    data = ['@ayu_papiko39 まあ、一人でも楽しいよ_(:3」∠)_
+    RT @miya_pop46: 【ゆる募】
+    明日(というか今日)の夕方から夜あたり乃木ヲタと2人で飲むんですがわいわいした方が楽しいかなぁ〜と思うのでお暇な関西乃木ヲタさん方どうですか（＾ω＾）たぶん大阪の梅田か難波かです(ふわっとしすぎててすいませんw)
+    @hezz_osz キャッ私も好きです(*ﾉｪﾉ)うっかり沼入りましょうよ、楽しいらしいですよ黒尾沼。と言うか、すずき。さんははいきゅだとどこの沼に入ってるのか凄く興味ありますwww　そうですね、カンタレラの田中さんばりに待ってます全力で待ってればいつか潔子さんみたいに来字数制限
+    最近漫画を読むかアプリで遊んでるかのどちらかだ・・・楽しいけどなんか・・・ねぇ
+    ハミルさんちのメイド襲うよりも我が家のめいちゃんモフモフした方が楽しいですー！
+    やっぱりねー、バーは楽しいね♪ 男女関係なく毎回出会い(ノ´∀｀*)',
+    '@kasi_0 はぁ～い♪今日も1日お疲れ様でした(人´ω｀*).☆.。.:*・゜毎日ありがとう♥素敵な癒しの夜を♥週末も楽しいことがたくさんありますように(*ﾟ∀`*)ﾉ☆｡ﾟ+.おやすみなさいｚｚｚ明日も素晴らしい1日でありますように♪(●´з｀人´ε｀●)♪♥♥♥♥♥♥♥♥
+    ごかげつ！昨日の買い物もたーのしかったしいっつも楽しい！これからも一緒に楽しめるでしょーう♪♪ http://t.co/oMXFna9g7W
+    @artmonet556 こんばんは！この頃のTVは嵐祭りですね！yokoさん、楽しい毎日でしょう♪で、朝日の関根さん、朝刊連載の「プロメテウスの罠」にご登場ですよ。10数回の長期連載みたいです。励ましのお言葉を！
+    楽しいツイートなんて出来ない
+    @ayu_papiko39 
+    まあ、一人でも楽しいよ_(:3」∠)_
+    RT @miya_pop46: 【ゆる募】
+    明日(というか今日)の夕方から夜あたり乃木ヲタと2人で飲むんですがわいわいした方が楽しいかなぁ〜と思うのでお暇な関西乃木ヲタさん方どうですか（＾ω＾）たぶん大阪の梅田か難波かです(ふわっとしすぎててすいませんw)',
+    '@hezz_osz キャッ私も好きです(*ﾉｪﾉ)うっかり沼入りましょうよ、楽しいらしいですよ黒尾沼。と言うか、すずき。さんははいきゅだとどこの沼に入ってるのか凄く興味ありますwww　そうですね、カンタレラの田中さんばりに待ってます全力で待ってればいつか潔子さんみたいに来字数制限
+    最近漫画を読むかアプリで遊んでるかのどちらかだ・・・楽しいけどなんか・・・ねぇ
+    ハミルさんちのメイド襲うよりも我が家のめいちゃんモフモフした方が楽しいですー！
+    やっぱりねー、バーは楽しいね♪ 男女関係なく毎回出会い(ノ´∀｀*)
+    @kasi_0 はぁ～い♪今日も1日お疲れ様でした(人´ω｀*).☆.。.:*・゜毎日ありがとう♥素敵な癒しの夜を♥週末も楽しいことがたくさんありますように(*ﾟ∀`*)ﾉ☆｡ﾟ+.おやすみなさいｚｚｚ明日も素晴らしい1日でありますように♪(●´з｀人´ε｀●)♪♥♥♥♥♥♥♥♥
+    ごかげつ！昨日の買い物もたーのしかったしいっつも楽しい！これからも一緒に楽しめるでしょーう♪♪ http://t.co/oMXFna9g7W
+    @artmonet556 こんばんは！この頃のTVは嵐祭りですね！yokoさん、楽しい毎日でしょう♪で、朝日の関根さん、朝刊連載の「プロメテウスの罠」にご登場ですよ。10数回の長期連載みたいです。励ましのお言葉を！
+    楽しいツイートなんて出来ない']
     params = Hash.new
     params[:oauth_token] = ENV['TW_AC_TOKEN']
     params[:oauth_token_secret] = ENV['TW_AC_SECRET']
-    expect(SocialGrouping::Main.new('twitter', params).mining("0", "4", data, "webgrp")).to eq({"error"=>"", "account"=>"webgrp"})    
+    expect(SocialGrouping::Main.new('twitter', params).corpusing( data )).to eq({"error"=>"", "account"=>"webgrp"})        
   end
 
 end

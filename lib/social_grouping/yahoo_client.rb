@@ -1,15 +1,16 @@
+require 'net/http'
+require 'rexml/document'
 require 'nokogiri'
 require 'moji'
 
 class YahooClient
-  require 'rexml/document'
 
   @ma_api
-  @key_api
+  @count_api
   
   def initialize
     @ma_api = 'http://jlp.yahooapis.jp/MAService/V1/parse?appid=' + ENV['YH_API_ID'] + '&results=uniq&filter=9&sentence='  
-    @key_api = 'http://jlp.yahooapis.jp/KeyphraseService/V1/extract?appid=' + ENV['YH_API_ID'] + '&sentence='  
+    @count_api = 'http://jlp.yahooapis.jp/MAService/V1/parse?appid=' + ENV['YH_API_ID'] + '&results=uniq&filter=1|2|3|9|10&response=surface&uniq_by_baseform=true&sentence='  
   end
   
   def get_noun(profile, nouns)
@@ -37,21 +38,23 @@ class YahooClient
     return nouns
   end
   
-  def get_key(sentence, nouns)
-    result = Net::HTTP.get(URI.parse(URI.escape(@key_api + sentence)))
-    doc = REXML::Document.new(result)
-    doc.elements.each('ResultSet/Result') do |elem|
-      noun = elem.elements[1].text.upcase
-      value = elem.elements[2].text.to_i
-      if noun.split(//).size > 1
-        if nouns.key?(noun)
-          nouns[noun] = nouns[noun] * value
-        else
-          nouns[noun] = value
+  def get_count( texts )
+    result = Hash.new
+    texts.each do | text |
+      response = Net::HTTP.get(URI.parse(URI.escape(@count_api + text)))
+      doc = REXML::Document.new(response)
+      doc.elements.each('ResultSet/uniq_result/word_list/word') do |elem|
+        word = elem.elements[2].text
+        unless word.ascii_only?
+          if result.key?(word)
+            result[word] += 1
+          else
+            result[word] = 1
+          end
         end
       end
     end
-    return nouns
+    return result
   end
-  
+
 end
