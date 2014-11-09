@@ -172,6 +172,8 @@ class TwitterClient
           result.push( status.text )
         end
       end
+    rescue Twitter::Error::Unauthorized
+      
     rescue Twitter::Error::TooManyRequests => e
       limit = e.rate_limit
       raise StandardError, 'wait until ' + limit.reset_at.to_s
