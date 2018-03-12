@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
 
   spec.add_dependency "activesupport"
-  spec.add_dependency "twitter", "~>5.9"
+  spec.add_dependency "twitter"
   spec.add_dependency "moji", "~>1.6"
   spec.add_dependency "nokogiri", "~>1.6"
 
